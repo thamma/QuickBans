@@ -18,4 +18,4 @@ The core idea was to create something which saves time by automatically suggesti
 * (Optional) Use your favorite text editor to configure the quickbans.cfg file to fit your needs.
 * Run it again! The programm finished working once you hear a **beep** sound.
 * Now you're ready to go! Head into champ select and use your clipboard (Ctrl + V) to display the suggested bans!
-![Image](https://zippy.gfycat.com/OffbeatWavyAmericanalligator.webm)
+![Image](https://media.giphy.com/media/3rgXBxIdlkiBg0b7VK/giphy.gif)
