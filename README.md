@@ -1,21 +1,14 @@
 # QuickBans - Run it, paste it, ban it!
 ##Overview
+<!--
 * How to use: [Link](https://github.com/thamma/QuickBans#getting-started)
 * Description: [Link](https://github.com/thamma/quickbans#what-is-it)
+-->
 
 ## What is it
 QuickBans is a tool for league of legends. You can filter the champions in champion select by multiple champions by seperating them with the pipe ('|') character. QuickBans collects data from [bestbans.com](http://bestbans.com/) to create a customized preset of suggested bans for you!
 
 The core idea was to create something which saves time by automatically suggesting the most banworthy champions.
-
-## What does it do
-Generates a list of smart ban suggestions and loads it to your clipboard. Easy as this.
-
-## Why is it awesome?
-Run it. Paste it. Ban it.
-
-## How does it work?
-It uses http://bestbans.com/ to figure out which champs are recommended.
 
 ## Getting started:
 * As my programm is written in Java, please make sure you have java installed. ([Java download](http://www.java.com/en/download/win10.jsp))
