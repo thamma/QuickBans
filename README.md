@@ -1,6 +1,6 @@
 # QuickBans - Run it, paste it, ban it!
-##Overview
 <!--
+##Overview
 * How to use: [Link](https://github.com/thamma/QuickBans#getting-started)
 * Description: [Link](https://github.com/thamma/quickbans#what-is-it)
 -->
