@@ -22,7 +22,7 @@ public class ConfigHandler {
             if (s.startsWith(key + "="))
                 return s.replaceFirst(key + "=", "");
         }
-        setDefaultConfig();
+        writeDefaultConfig();
         return getValue(key);
     }
 
@@ -34,7 +34,7 @@ public class ConfigHandler {
                     "# options: bronze, silver, gold, platinum, diamond\n" +
                     "league=silver";
 
-    private void setDefaultConfig() {
+    private void writeDefaultConfig() {
         List<String> defConf = new ArrayList<String>();
         for (String s : defaultConfig.split("\\n"))
             defConf.add(s);
@@ -54,7 +54,6 @@ public class ConfigHandler {
                 }
                 br.close();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 System.out.println("Error loading file: \"" + e.getMessage()
                         + "\"");
             }
@@ -80,7 +79,6 @@ public class ConfigHandler {
             writer.close();
             return true;
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             System.out.println("Error saving file: \"" + e.getMessage() + "\"");
             return false;
         }

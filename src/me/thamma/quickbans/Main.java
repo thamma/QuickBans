@@ -16,17 +16,17 @@ import java.util.Set;
 public class Main {
 
     public static void main(String[] args) throws IOException, InterruptedException {
+        // load variables from config
         ConfigHandler ch = new ConfigHandler();
         String league = ch.getValue("league");
-        int amount = Integer.parseInt(ch.getValue("limit"));
+        int n = Integer.parseInt(ch.getValue("limit"));
+        // collect the data in Set
         Set<String> champs = new HashSet<String>();
-        for (String division : league.split(",")) {
-            champs.addAll(getChamps(division).subList(0, amount - 1));
-        }
-        List<String> noMultiples = new ArrayList<String>();
-        noMultiples.addAll(champs);
-        String out = buildPipeString(noMultiples);
-        clipboard(out);
+        //add first n champs per league to set
+        for (String division : league.split(","))
+            champs.addAll(Main.getChamps(division).subList(0, n - 1));
+        String clipboardContent = Main.buildPipeString(champs);
+        Main.clipboard(clipboardContent);
         Toolkit.getDefaultToolkit().beep();
     }
 
@@ -51,9 +51,10 @@ public class Main {
         return out;
     }
 
-    public static List<String> parseChamps(List<String> htmlLines) throws InterruptedException {
+    public static List<String> parseChamps(List<String> htmlLines) {
         List<String> out = new ArrayList<String>();
         htmlLines = trim(htmlLines);
+        // yes this is very messy and will break once the site layout changes
         for (int i = 0; i < htmlLines.size() / 13; i++) {
             out.add(htmlLines.get(i * 13 + 4).replaceAll("&#39;", "'").trim());
         }
@@ -70,25 +71,20 @@ public class Main {
             if (content && temp.contains("/tbody>")) {
                 break;
             }
-            if (content && !whiteSpace(temp))
+            if (content && !(temp.trim().equals("")))
                 newLines.add(temp);
         }
-        newLines.remove(0);
+        newLines.remove(0); // pop <tbody>
         return newLines;
     }
 
-    public static boolean whiteSpace(String s) {
-        for (char c : s.toCharArray()) {
-            if (c != ' ')
-                return false;
-        }
-        return true;
-    }
 
-    public static String buildPipeString(List<String> champs) {
+    public static String buildPipeString(Set<String> champsSet) {
         String out = "";
-        for (int i = 0; i < champs.size(); i++) {
-            out += (i != 0 ? "|" : "") + champs.get(i);
+        List<String> champsList = new ArrayList<String>();
+        champsList.addAll(champsSet);
+        for (int i = 0; i < champsList.size(); i++) {
+            out += (i != 0 ? "|" : "") + champsList.get(i);
         }
         return out;
     }
