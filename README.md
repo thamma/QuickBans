@@ -1,4 +1,7 @@
 # QuickBans
+##Overview
+* How to use: [Link]()
+
 
 ## What is it
 A tool for League of Legends
@@ -12,7 +15,7 @@ Run it. Paste it. Ban it.
 ## How does it work?
 It uses http://bestbans.com/ to figure out which champs are recommended.
 
-## How to:
+## Getting started:
 * Make sure you have java installed.
 * Download: [Link](https://github.com/thamma/QuickBans/releases/download/v0.1-alpha/QuickBans.jar)
 * Run it for the very first time
