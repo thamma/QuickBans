@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class ConfigHandler {
 
-    final String path = "bestbans.cfg";
+    final String path = "quickbans.cfg";
     private List<String> lines;
 
     public ConfigHandler() {
