@@ -1,6 +1,4 @@
-package me.jesko;
-
-import jdk.nashorn.internal.runtime.regexp.joni.Config;
+package me.thamma.quickbans;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;

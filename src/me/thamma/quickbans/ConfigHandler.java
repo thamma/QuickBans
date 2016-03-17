@@ -1,4 +1,4 @@
-package me.jesko;
+package me.thamma.quickbans;
 
 import java.io.*;
 import java.util.ArrayList;
