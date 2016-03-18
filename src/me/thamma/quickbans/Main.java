@@ -80,17 +80,11 @@ public class Main {
 
 
     public static String buildPipeString(Set<String> champsSet) {
-        String out = "";
-        List<String> champsList = new ArrayList<String>();
-        champsList.addAll(champsSet);
-        for (int i = 0; i < champsList.size(); i++) {
-            out += (i != 0 ? "|" : "") + champsList.get(i);
-        }
-        return out;
+        return String.join("|", champsSet);
     }
 
-    public static void clipboard(String theString) {
-        StringSelection selection = new StringSelection(theString);
+    public static void clipboard(String s) {
+        StringSelection selection = new StringSelection(s);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboard.setContents(selection, selection);
     }
