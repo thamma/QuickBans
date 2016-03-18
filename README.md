@@ -12,7 +12,7 @@ The core idea was to create something which saves time by automatically suggesti
 
 ## Getting started:
 * As my programm is written in Java, please make sure you have java installed. ([Java download](http://www.java.com/en/download/win10.jsp))
-* Download the executable jar: [Link](https://github.com/thamma/QuickBans/releases/download/v0.1-alpha/QuickBans.jar)
+* Download the executable jar: [Link](https://github.com/thamma/QuickBans/releases)
 * Run it for the very first time. This will create the quickbans.cfg configuration file.
 ![Image](http://i.imgur.com/zllCLti.png)
 * (Optional) Use your favorite text editor to configure the quickbans.cfg file to fit your needs.
