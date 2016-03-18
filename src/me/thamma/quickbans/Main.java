@@ -20,14 +20,21 @@ public class Main {
         ConfigHandler ch = new ConfigHandler();
         String league = ch.getValue("league");
         int n = Integer.parseInt(ch.getValue("limit"));
-        // collect the data in Set
-        Set<String> champs = new HashSet<String>();
-        //add first n champs per league to set
-        for (String division : league.split(","))
-            champs.addAll(Main.getChamps(division).subList(0, n - 1));
-        String clipboardContent = Main.buildPipeString(champs);
-        Main.clipboard(clipboardContent);
-        Toolkit.getDefaultToolkit().beep();
+        String preset = ch.getValue("customPreset");
+        if (preset.equals("")) {        // collect the data in Set
+            Set<String> champs = new HashSet<String>();
+            //add first n champs per league to set
+            for (String division : league.split(","))
+                champs.addAll(Main.getChamps(division).subList(0, n - 1));
+            String clipboardContent = Main.buildPipeString(champs);
+            Main.clipboard(clipboardContent);
+            Toolkit.getDefaultToolkit().beep();
+        } else {
+            Main.clipboard(preset);
+            Toolkit.getDefaultToolkit().beep();
+        }
+
+
     }
 
     public static List<String> getChamps(String league) throws IOException, InterruptedException {

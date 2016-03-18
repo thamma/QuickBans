@@ -32,7 +32,10 @@ public class ConfigHandler {
                     "# The league(s) to suggest the bans for\n" +
                     "# seperate multiple leagues by commas\n" +
                     "# options: bronze, silver, gold, platinum, diamond\n" +
-                    "league=silver";
+                    "league=silver\n" +
+                    "# You can also specify a very custom preset. If not, leave it blank.\n" +
+                    "# (Beware: it will then ignore all the above options!)\n" +
+                    "customPreset=";
 
     private void writeDefaultConfig() {
         List<String> defConf = new ArrayList<String>();
