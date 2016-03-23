@@ -1,11 +1,20 @@
 package me.thamma.quickbans;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.annotation.ElementType;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -15,29 +24,50 @@ import java.util.Set;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException, InterruptedException, SAXException {
         // load variables from config
-        ConfigHandler ch = new ConfigHandler();
-        String league = ch.getValue("league");
-        int n = Integer.parseInt(ch.getValue("limit"));
-        String preset = ch.getValue("customPreset");
-        if (preset.equals("")) {        // collect the data in Set
-            Set<String> champs = new HashSet<String>();
-            //add first n champs per league to set
-            for (String division : league.split(","))
-                champs.addAll(Main.getChamps(division).subList(0, n - 1));
-            String clipboardContent = Main.buildPipeString(champs);
-            Main.clipboard(clipboardContent);
-            Toolkit.getDefaultToolkit().beep();
-        } else {
-            Main.clipboard(preset);
-            Toolkit.getDefaultToolkit().beep();
-        }
-
-
+//        ConfigHandler ch = new ConfigHandler();
+//        String league = ch.getValue("league");
+//        int n = Integer.parseInt(ch.getValue("limit"));
+//        String preset = ch.getValue("customPreset");
+        getChamps("Shaiin", "EUW", 3).forEach(s->
+                System.out.println(s));
     }
 
-    public static List<String> getChamps(String league) throws IOException, InterruptedException {
+    public static List<String> getChamps(String summoner, String region) throws IOException {
+        List<String> champs = new ArrayList<String>();
+        Document doc = Jsoup.connect("http://www.bestbans.com/summoner/" + region + "/" + summoner + "/season/").timeout(0).get();
+        Elements champSquares = doc.getElementsByClass("summoner-panel").get(0).getElementsByClass("panel-body").get(0).getElementsByClass("row").get(0).getElementsByClass("summoner-champ-square");
+        champSquares.forEach(square ->
+                champs.add(square.getElementsByTag("p").get(0).text())
+        );
+        return champs;
+    }
+
+    public static List<String> getChamps(String summoner, String region, int amount) throws IOException {
+        List<String> out = getChamps(summoner, region);
+        return out.subList(0, Math.min(amount, out.size()));
+    }
+
+    public static List<String> getPersonalChamps(String summoner, String region) throws IOException {
+        List<String> champs = new ArrayList<String>();
+        Document doc = Jsoup.connect("http://www.bestbans.com/summoner/" + region + "/" + summoner + "/season/").timeout(0).get();
+        Elements table = doc.getElementsByClass("col-md-9").get(0)
+                .getElementById("summonerBansTable").getElementsByTag("tbody").get(0).getElementsByTag("tr");
+        table.forEach(element -> champs.add(element.getElementsByTag("td").get(0).getElementsByTag("div").get(0).text()));
+//        for (Element e : table) {
+//            System.out.println(e.getElementsByTag("td").get(0).getElementsByTag("div").get(0).text());
+//        }
+//        System.out.println(table);
+        return champs;
+    }
+
+    public static List<String> getPersonalChamps(String summoner, String region, int amount) throws IOException {
+        List<String> out = getPersonalChamps(summoner, region);
+        return out.subList(0, Math.min(amount, out.size()));
+    }
+
+    public static List<String> getGeneralChamps(String league) throws IOException, InterruptedException {
         List<String> lines = loadHtml(league);
         List<String> champs = parseChamps(lines);
         return champs;
