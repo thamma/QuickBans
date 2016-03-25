@@ -10,11 +10,11 @@ import java.util.List;
  */
 public class ConfigHandler {
 
-    final String path = "quickbans.cfg";
+    final String configPath = System.getenv("LOCALAPPDATA") + "\\quickbans\\quickbans.cfg";
     private List<String> lines;
 
     public ConfigHandler() {
-        lines = loadFile(path);
+        lines = Utils.loadFile(configPath);
     }
 
     public String getValue(String key) {
@@ -42,49 +42,7 @@ public class ConfigHandler {
         for (String s : defaultConfig.split("\\n"))
             defConf.add(s);
         this.lines = defConf;
-        saveFile(path, defConf);
-    }
-
-    public static List<String> loadFile(String subpath) {
-        List<String> lines = new ArrayList<String>();
-        File f = new File(subpath);
-        if (f.exists()) {
-            try {
-                BufferedReader br = new BufferedReader(new FileReader(f));
-                String line;
-                while ((line = br.readLine()) != null) {
-                    lines.add(line);
-                }
-                br.close();
-            } catch (IOException e) {
-                System.out.println("Error loading file: \"" + e.getMessage()
-                        + "\"");
-            }
-
-        } else {
-            System.out.println("File \"" + subpath + "\" could not be found.");
-        }
-        return lines;
-    }
-
-    public static boolean saveFile(String subpath, List<String> lines) {
-        File f = new File(subpath);
-        f.mkdirs();
-        if (f.exists()) {
-            f.delete();
-        }
-        try {
-            FileWriter writer;
-            writer = new FileWriter(f);
-            for (String s : lines) {
-                writer.write(s + "\n");
-            }
-            writer.close();
-            return true;
-        } catch (IOException e) {
-            System.out.println("Error saving file: \"" + e.getMessage() + "\"");
-            return false;
-        }
+        Utils.saveFile(configPath, defConf);
     }
 
 }
