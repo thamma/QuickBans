@@ -1,39 +1,64 @@
 package me.thamma.quickbans;
 
-import javafx.fxml.FXML ;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.layout.Pane;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import org.xml.sax.SAXException;
 
+import javafx.scene.control.Button;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class GuiController implements Initializable {
 
     @FXML
-    private Pane mainPane;
+    private ComboBox regionChoice;
 
     @FXML
-    private Label scrambleLabel, timerLabel;
+    private Button runButton;
 
     @FXML
-    private Label sessionLabel1, sessionLabel2;
+    private TextField summonerField, amountField;
 
     @FXML
-    private Button buttonRight, buttonLeft;
+    private RadioButton personalRadio, leagueRadio;
 
-    @FXML
-    private ListView<String> listView;
-
-    @FXML
-    private Label ao5Label, ao12Label, ao100Label, bao5Label, bao12Label, bao100Label, meanLabel, medianLabel, standartDerivationLabel, bestLabel, worstLabel, solvesLabel;
+    private String summoner, region, mode;
+    private int amount;
 
     @Override
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-
+        ObservableList<String> l = FXCollections.observableArrayList();
+        summonerField.textProperty().addListener(e -> summoner = summonerField.getText());
+        amountField.textProperty().addListener(e ->
+                amount = Integer.parseInt(amountField.getText()));
+        region = "EUW";
+        mode = "PERSONAL";
+        l.addAll(("BR\n" +
+                "EUNE\n" +
+                "EUW\n" +
+                "KR\n" +
+                "LAN\n" +
+                "LAS\n" +
+                "NA\n" +
+                "OCE\n" +
+                "RU\n" +
+                "TR").split("\n"));
+        regionChoice.setItems(l);
+        regionChoice.getSelectionModel().select(6);
+        runButton.setOnAction(e -> {
+                    System.out.println(summoner + "" + region + "" + mode + "" + amount);
+                    Main.loadQuickBans(summoner, region, mode, amount);
+                }
+        );
     }
+
 
 }
 

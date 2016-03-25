@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="495.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="495.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.thamma.quickbans.GuiController">
    <children>
       <GridPane alignment="CENTER" hgap="8.0" layoutX="7.0" prefHeight="400.0" prefWidth="600.0" vgap="8.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="-7.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -15,6 +15,7 @@
         <rowConstraints>
           <RowConstraints maxHeight="299.0" minHeight="10.0" prefHeight="199.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="268.0" minHeight="0.0" prefHeight="268.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="268.0" minHeight="10.0" prefHeight="268.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <AnchorPane GridPane.columnIndex="1">
@@ -22,7 +23,7 @@
                   <VBox alignment="CENTER" prefHeight="199.0" prefWidth="272.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <Label text="Region" />
-                        <ComboBox prefWidth="150.0" />
+                        <ComboBox fx:id="regionChoice" prefWidth="150.0" />
                      </children>
                   </VBox>
                </children>
@@ -32,21 +33,51 @@
                   <VBox alignment="CENTER" prefHeight="199.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.columnIndex="1">
                      <children>
                         <Label text="Summoner" />
-                        <TextField prefHeight="25.0" prefWidth="187.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="summonerField" prefHeight="25.0" prefWidth="187.0" GridPane.columnIndex="1" />
                      </children>
                   </VBox>
                </children>
             </AnchorPane>
-            <AnchorPane GridPane.columnSpan="2" GridPane.rowIndex="1">
+            <AnchorPane GridPane.rowIndex="1">
                <children>
                   <VBox alignment="CENTER" prefHeight="73.0" prefWidth="286.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <RadioButton mnemonicParsing="false" text="RadioButton" />
-                        <RadioButton mnemonicParsing="false" text="RadioButton" />
+                        <RadioButton fx:id="personalRadio" mnemonicParsing="false" selected="true" text="Personal suggestions">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="asd" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="leagueRadio" mnemonicParsing="false" text="League suggestions" toggleGroup="$asd" />
                      </children>
                   </VBox>
                </children>
             </AnchorPane>
+            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <Label text="Amount" />
+                  <TextField fx:id="amountField" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="173.0" text="8" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               </children>
+            </VBox>
+            <HBox alignment="CENTER" GridPane.columnSpan="2" GridPane.rowIndex="2">
+               <children>
+                  <Button fx:id="saveButton" mnemonicParsing="false" text="Save" GridPane.rowIndex="2">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="runButton" mnemonicParsing="false" text="Run" GridPane.rowIndex="2">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </HBox>
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

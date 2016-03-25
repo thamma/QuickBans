@@ -55,15 +55,15 @@ public class CacheHandler {
             long lastUpdate = Long.parseLong(cached.split(",")[0]);
 
             if (System.currentTimeMillis() - lastUpdate > requestTime) {
-                return reduce(request(summoner, region, mode, amount), amount);
+                return reduce(request(summoner, region, mode), amount);
             } else {
-                return reduce(this.local.get(summoner + "," + region + "," + mode), amount);
+                return reduce(this.local.get(summoner + "," + region + "," + mode).split(",")[1], amount);
             }
         }
-        return reduce(request(summoner, region, mode, amount), amount);
+        return reduce(request(summoner, region, mode), amount);
     }
 
-    public String request(String summoner, String region, String mode, int amount) {
+    public String request(String summoner, String region, String mode) {
         System.out.println("ISSUED_REQUEST{" + summoner + "," + region + "," + mode + "}");
         if (mode.equalsIgnoreCase("PERSONAL")) {
             String value = String.join("|", Hookup.getPersonalChamps(summoner, region));
